@@ -1,58 +1,70 @@
-import dynamic from 'next/dynamic';
+import { useQuery, gql } from "@apollo/client";
+import Graph from "./graph";
+import leaderBoard from "./leaderboard";
+import ConstructNodeAndLinkData from "./nodeAndLinkData";
 
-const NoSSRForceGraph = dynamic(() => import('../components/force3d'), {
-  ssr: false,
-});
+const QUERY = gql`
+  query Visualization {
+    accountTokenSnapshots(
+      where: {token: "0x263026e7e53dbfdce5ae55ade22493f828922965", totalOutflowRate_gt: "0"}
+      orderBy: totalOutflowRate
+      orderDirection: desc
+    ) {
+      totalOutflowRate
+      account {
+        id
+        outflows {
+          receiver {
+            id
+          }
+        }
+      }
+    }
+  }
+`;
 
-const gData = {
-  nodes: [...Array(14).keys()].map(i => ({ id: i })),
-  links: [
-    { source: 0, target: 1, curvature: 0, rotation: 0 },
-    { source: 0, target: 1, curvature: 0.8, rotation: 0 },
-    { source: 0, target: 1, curvature: 0.8, rotation: Math.PI * 1 / 6 },
-    { source: 0, target: 1, curvature: 0.8, rotation: Math.PI * 2 / 6 },
-    { source: 0, target: 1, curvature: 0.8, rotation: Math.PI * 3 / 6 },
-    { source: 0, target: 1, curvature: 0.8, rotation: Math.PI * 4 / 6 },
-    { source: 0, target: 1, curvature: 0.8, rotation: Math.PI * 5 / 6 },
-    { source: 0, target: 1, curvature: 0.8, rotation: Math.PI },
-    { source: 0, target: 1, curvature: 0.8, rotation: Math.PI * 7 / 6 },
-    { source: 0, target: 1, curvature: 0.8, rotation: Math.PI * 8 / 6 },
-    { source: 0, target: 1, curvature: 0.8, rotation: Math.PI * 9 / 6 },
-    { source: 0, target: 1, curvature: 0.8, rotation: Math.PI * 10 / 6 },
-    { source: 0, target: 1, curvature: 0.8, rotation: Math.PI * 11 / 6 },
-    { source: 2, target: 3, curvature: 0.4, rotation: 0 },
-    { source: 3, target: 2, curvature: 0.4, rotation: Math.PI / 2 },
-    { source: 2, target: 3, curvature: 0.4, rotation: Math.PI },
-    { source: 3, target: 2, curvature: 0.4, rotation: -Math.PI / 2 },
-    { source: 4, target: 4, curvature: 0.3, rotation: 0 },
-    { source: 4, target: 4, curvature: 0.3, rotation: Math.PI * 2 / 3 },
-    { source: 4, target: 4, curvature: 0.3, rotation: Math.PI * 4 / 3 },
-    { source: 5, target: 6, curvature: 0, rotation: 0 },
-    { source: 5, target: 5, curvature: 0.5, rotation: 0 },
-    { source: 6, target: 6, curvature: -0.5, rotation: 0 },
-    { source: 7, target: 8, curvature: 0.2, rotation: 0 },
-    { source: 8, target: 9, curvature: 0.5, rotation: 0 },
-    { source: 9, target: 10, curvature: 0.7, rotation: 0 },
-    { source: 10, target: 11, curvature: 1, rotation: 0 },
-    { source: 11, target: 12, curvature: 2, rotation: 0 },
-    { source: 12, target: 7, curvature: 4, rotation: 0 },
-    { source: 13, target: 13, curvature: 0.1, rotation: 0 },
-    { source: 13, target: 13, curvature: 0.2, rotation: 0 },
-    { source: 13, target: 13, curvature: 0.5, rotation: 0 },
-    { source: 13, target: 13, curvature: 0.7, rotation: 0 },
-    { source: 13, target: 13, curvature: 1, rotation: 0 }
-  ]
-};
+const stream_subscription = gql`
+  subscription OnNewStreamAdded {
+    accountTokenSnapshots(
+      where: {token: "0x263026e7e53dbfdce5ae55ade22493f828922965", totalOutflowRate_gt: "0"}
+      orderBy: totalOutflowRate
+      orderDirection: desc
+    ) {
+      totalOutflowRate
+      account {
+        id
+        outflows {
+          receiver {
+            id
+          }
+        }
+      }
+    }
+  }
+`;
+
 
 export default function Visualize() {
-  if (typeof window !== 'undefined') {
-    return (
-      <NoSSRForceGraph
-        graphData={gData}
-        linkCurvature="curvature"
-        linkCurveRotation="rotation"
-        linkDirectionalParticles={2}
-      />
-    );
+  const { subscribeToMore, data, loading, error } = useQuery(QUERY);
+  
+
+  if (loading) {
+    return <h2><a href="#loading" aria-hidden="true" className="aal_anchor" id="loading"><svg aria-hidden="true" className="aal_svg" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fillRule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Loading...</h2>;
   }
+
+  if (error) {
+    console.error(error);
+    return null;
+  }
+  const nodeAndLinkData = ConstructNodeAndLinkData(data)
+  return (
+    <div className="grid grid-cols-5 w-full">
+      <div className="col-span-3">
+        {Graph(nodeAndLinkData)}
+      </div>
+      <div className="col-span-2 p-10">
+        {leaderBoard(nodeAndLinkData)}
+      </div>
+    </div>
+  );
 }
