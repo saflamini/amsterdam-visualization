@@ -14,7 +14,6 @@ export default function ClientSide() {
 
       <ClientOnly>
         <QueryResult />
-        {/* <LeaderBoard /> */}
       </ClientOnly>
     </>
   );

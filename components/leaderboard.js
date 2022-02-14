@@ -6,12 +6,6 @@ function smallAddress(address) {
 
 function leaderBoard(data) {
   console.log(data);
-  const orderByInflowRate = data.nodes.sort(
-    (a, b) => b.totalInflowRate - a.totalInflowRate
-  );
-  const orderByOutflowRate = data.nodes.sort(
-    (a, b) => b.totalOutflowRate - a.totalOutflowRate
-  );
 
   return (
     <div className="col-span-2 p-10 max-h-screen">

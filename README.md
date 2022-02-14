@@ -1,3 +1,5 @@
+# Superfluid visualization
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
@@ -12,23 +14,30 @@ yarn dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+Graph and Leaderboard can be seen in `/visualize`
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+## Deployed instance
+https://vibrant-yonath-e995e3.netlify.app/visualize
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Add names to node Address:
+To add names to node: Add entry in `component/namedAdd.js`
 
-## Learn More
+Example entry
+```
+const namedAddress = {
+  "0x98d463a3f29f259e67176482eb15107f364c7e18" : "vitalik.eth",
+  "0x9d7894ed2ddb65e0ca36fe872cbb57b8e9aaddac": "ananya.eth"
+}
+```
+## Query:
+Query is defined in `components/visualize.js` and token address is hardcoded there.
+Visualize function under components/visualize.js has [pollInterval](https://www.apollographql.com/docs/react/api/react/hoc/#optionspollinterval), which can be set accordingly for when to refetch query results. 
 
-To learn more about Next.js, take a look at the following resources:
+## Node colors:
+Node colors are taken randomly from a set of colors defined in `components/nodeAndLinkData.js`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Leader board:
+Both inflow and outflow are sorted by amount in `components/leaderboard.js`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Graph setting:
+Graph is set in `components/graph.js`
