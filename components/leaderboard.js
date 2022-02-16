@@ -1,3 +1,4 @@
+import { Image } from "next";
 function smallAddress(address) {
   const addBegin = address.substring(0, 6);
   const addEnd = address.substring(address.length - 4, address.length);
@@ -13,7 +14,7 @@ function leaderBoard(data) {
   return (
     <div className="col-span-2 p-10 max-h-screen">
       <div>
-        <img className="w-96" src="superfluid-logo.jpg"></img>
+        <Image alt="sf-logo" className="w-96" src="superfluid-logo.jpg"></Image>
       </div>
       <div className="py-2 pt-6 text-3xl font-semibold text-white">
         🔝 Leaderboard
@@ -51,7 +52,7 @@ function leaderBoard(data) {
           </li>
           <li className="text-sm pt-3">
             2. Send and receive streams of BGTx to people at ETHDenver to build
-            your streaming volume — just be careful you don't hit zero balance
+            your streaming volume — just be careful you don&apos;t hit zero balance
             of BGTx or your streams will stop!
           </li>
           <li className="text-sm pt-3">
