@@ -11,7 +11,7 @@ export const formatFlowRateToDaily = (flowRate) => {
 
 function leaderBoard(data) {
   return (
-    <div className="col-span-2 p-10 max-h-screen">
+    <div className="col-span-2 p-8 max-h-screen">
       <div>
         <img alt="sf-logo" className="w-96" src="superfluid-logo.jpg"></img>
       </div>
@@ -29,7 +29,7 @@ function leaderBoard(data) {
               return (
                 <div className="grid grid-cols-2 font-mono" key={node.id}>
                   <div className="text-white font-medium">
-                    {node.name ? node.name : smallAddress(node.id)}
+                    {index + 1}. {node.name ? node.name : smallAddress(node.id)}
                   </div>
                   <div className="text-right text-white">
                     {formatFlowRateToDaily(node.totalOutflowRate)}
