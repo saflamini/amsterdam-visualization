@@ -3,15 +3,13 @@
 @tailwind utilities;
 
 .scrollable-container {
-  height: 25vh;
   max-height: 25vh;
   overflow-y: scroll;
 }
 .rules-container {
-  height: 29.5vh;
-  max-height: 29.5vh;
+  max-height: 25vh;
   overflow-y: scroll;
-  margin-top: 2rem;
+  margin-top: 3rem;
 }
 
 /* html,
