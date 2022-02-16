@@ -1,4 +1,5 @@
 import dynamic from "next/dynamic";
+import { formatFlowRateToDaily } from "./leaderboard";
 
 const NoSSRForceGraph = dynamic(() => import("./force3d"), {
   ssr: false,
@@ -20,9 +21,9 @@ const label = (node) => {
   return `<div class="bg-gray-900 rounded-lg px-4 py-2">
       <span>${htmlAddress(node)}</span>
       <br />
-      <span><b>Total Outflow:</b> ${node.totalOutflowRate}</span>
+      <span><b>Total Outflow:</b> ${formatFlowRateToDaily(node.totalOutflowRate)}</span>
       <br />
-      <span><b>Total Inflow:</b> ${node.totalInflowRate}</span>
+      <span><b>Total Inflow:</b> ${formatFlowRateToDaily(node.totalInflowRate)}</span>
     </div>`;
 };
 
@@ -39,7 +40,7 @@ function Graph(gData) {
         nodeRelSize={3}
         width={window.innerWidth * 7/10}
         height={window.innerHeight}
-        backgroundColor="rgb(24,24,32)"
+        backgroundColor="rgb(0,0,0)"
       />
     );
   }

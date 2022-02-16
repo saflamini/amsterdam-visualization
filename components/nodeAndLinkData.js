@@ -1,38 +1,47 @@
 import namedAddress from "./namedAdd";
 
-const Color = ['red', 'orange', 'yellow', 'green', 'pink', 'white', 'cyan', 'Magenta', 'goldenrod', 'darkorange', 'darkcyan', 'darkmagenta', 'darkgoldenrod'];
-
 function ConstructNodeAndLinkData(data) {
   var nodes = [];
   var links = [];
-  data.accountTokenSnapshots.forEach(({ account, totalOutflowRate}) => {
-    var node = { 
+  let mutableAccountTokenSnapshots = [...data.accountTokenSnapshots];
+
+  const topTenOutflowAcountIds = mutableAccountTokenSnapshots
+    .sort((a, b) =>
+      Number(a.totalOutflowRate) > Number(b.totalOutflowRate) ? -1 : 1
+    )
+    .map(x => x.account.id)
+    .slice(0, 10);
+  data.accountTokenSnapshots.forEach(({ account, totalOutflowRate }) => {
+    var node = {
       id: account.id,
       name: namedAddress[account.id],
-      nodeRelSize: totalOutflowRate/100000000000, // dividing to make it smaller
-      color: Color[Math.floor(Math.random() * Color.length)],
+      nodeRelSize: Math.log(totalOutflowRate), // dividing to make it smaller
+      color: topTenOutflowAcountIds.includes(account.id)
+        ? "rgb(255, 255, 255)"
+        : "rgb(86, 184, 73)",
       totalOutflowRate: totalOutflowRate,
       totalInflowRate: 0,
     };
     nodes.push(node);
     account.outflows.forEach(({ receiver }) => {
       // if node present in nodes, fetch it, else create a new node
-      var nodeIndex = nodes.findIndex(n => n.id === receiver.id);
+      var nodeIndex = nodes.findIndex((n) => n.id === receiver.id);
       if (nodeIndex === -1) {
-        nodes.push({ 
+        nodes.push({
           id: receiver.id,
           name: namedAddress[receiver.id],
-          nodeRelSize: 1,
-          color: Color[Math.floor(Math.random() * Color.length)],
+          nodeRelSize: 6.9,
+          color: "rgb(86, 184, 73)",
           totalOutflowRate: 0,
-          totalInflowRate: totalOutflowRate/account.outflows.length,
+          totalInflowRate: totalOutflowRate / account.outflows.length,
         });
       } else {
-        nodes[nodeIndex].totalInflowRate += totalOutflowRate/account.outflows.length;
+        nodes[nodeIndex].totalInflowRate +=
+          totalOutflowRate / account.outflows.length;
       }
-      var link = { 
+      var link = {
         source: account.id,
-        target: receiver.id, 
+        target: receiver.id,
         curvature: 0,
         rotation: 0,
       };
@@ -43,4 +52,3 @@ function ConstructNodeAndLinkData(data) {
 }
 
 export default ConstructNodeAndLinkData;
-

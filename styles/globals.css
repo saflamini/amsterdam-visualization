@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+.scrollable-container {
+  height: 25vh;
+  max-height: 25vh;
+  overflow-y: scroll;
+}
 /* html,
 body {
   padding: 0;
