@@ -1,4 +1,3 @@
-import { Image } from "next";
 function smallAddress(address) {
   const addBegin = address.substring(0, 6);
   const addEnd = address.substring(address.length - 4, address.length);
@@ -14,7 +13,7 @@ function leaderBoard(data) {
   return (
     <div className="col-span-2 p-10 max-h-screen">
       <div>
-        <Image alt="sf-logo" className="w-96" src="superfluid-logo.jpg"></Image>
+        <img alt="sf-logo" className="w-96" src="superfluid-logo.jpg"></img>
       </div>
       <div className="py-2 pt-6 text-3xl font-semibold text-white">
         🔝 Leaderboard
