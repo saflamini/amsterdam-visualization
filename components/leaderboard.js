@@ -40,11 +40,32 @@ function leaderBoard(data) {
           })}
       </div>
 
-      <div className="pt-10 pb-4 text-xl font-semibold text-white">
-        <p>Rules</p>
-        <p>1.</p>
-        <p>2.</p>
-        <p>...</p>
+      <div className="rules-container font-semibold text-white">
+        <p className="text-xl">Rules of the Game</p>
+        <p className="text-xs text-gray-400">Scroll for more rules</p>
+        <ol className="list-decimal">
+          <li className="text-sm pt-3">
+            1. Get some BuffiGwei Super Tokens (BGTx) by joining our workshop or
+            wrap your BuffiGwei Tokens (BGT) in the Superfluid Dashboard on
+            Arbitrum Rinkeby.
+          </li>
+          <li className="text-sm pt-3">
+            2. Send and receive streams of BGTx to people at ETHDenver to build
+            your streaming volume — just be careful you don't hit zero balance
+            of BGTx or your streams will stop!
+          </li>
+          <li className="text-sm pt-3">
+            3. Throughout the duration of ETHDenver, aim for the highest BGTx
+            outflow rate by Sunday, February 20th at 12pm MST. The 10 players
+            with the highest streaming volumes will receive an edition of the
+            NFT!
+          </li>
+          <li className="text-sm pt-3">
+            4. Make sure to stop by our booth on the 3rd level of the Web3
+            Castle and share proof of your stream to receive a Stream It Forward
+            POAP!
+          </li>
+        </ol>
       </div>
     </div>
   );
