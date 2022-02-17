@@ -66,6 +66,9 @@ export default function Visualize() {
   const nodeAndLinkData = ConstructNodeAndLinkData(data);
   return (
     <div className="grid grid-cols-10 w-full">
+      <div className="floating-qr">
+        <img alt="bgt-qr" src="bgt-qr.png" />
+      </div>
       <div className="col-span-7">{Graph(nodeAndLinkData)}</div>
       <div className="col-span-3 p-10 bg-black">
         {leaderBoard(nodeAndLinkData)}

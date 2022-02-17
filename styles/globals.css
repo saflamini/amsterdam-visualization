@@ -12,6 +12,14 @@
   margin-top: 2.8rem;
 }
 
+.floating-qr {
+  position: absolute;
+  width: 10vw;
+  z-index: 100;
+  top: 1vw;
+  left: 1vw;
+}
+
 /* html,
 body {
   padding: 0;
