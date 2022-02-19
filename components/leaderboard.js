@@ -24,7 +24,7 @@ function leaderBoard(data) {
       <div className="scrollable-container">
         {data.nodes
           .sort((a, b) => b.totalOutflowRate - a.totalOutflowRate)
-          .filter(x => x.id !== "0x9d8d022f291c114a44a94e69b3e05cc1cb3d90e7")
+          .filter((x) => x.id !== "0x9d8d022f291c114a44a94e69b3e05cc1cb3d90e7")
           .map((node, index) => {
             if (node.totalOutflowRate > 0) {
               return (
@@ -38,7 +38,8 @@ function leaderBoard(data) {
                 </div>
               );
             }
-          })}
+          })
+          .slice(0, 10)}
       </div>
 
       <div className="rules-container font-semibold text-white">
@@ -52,8 +53,8 @@ function leaderBoard(data) {
           </li>
           <li className="text-sm pt-3">
             2. Send and receive streams of BGTx to people at ETHDenver to build
-            your streaming volume — just be careful you don&apos;t hit zero balance
-            of BGTx or your streams will stop!
+            your streaming volume — just be careful you don&apos;t hit zero
+            balance of BGTx or your streams will stop!
           </li>
           <li className="text-sm pt-3">
             3. Throughout the duration of ETHDenver, aim for the highest BGTx
