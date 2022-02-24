@@ -7,7 +7,7 @@ const QUERY = gql`
   query Visualization {
     accountTokenSnapshots(
       where: {
-        token: "0xf477275d4a790a6927cfe979e6bff7e1547808a9"
+        token: "0xcaa7349cea390f89641fe306d93591f87595dc1f"
         totalOutflowRate_gt: "0"
       }
       orderBy: totalOutflowRate

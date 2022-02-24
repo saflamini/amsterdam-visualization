@@ -24,7 +24,6 @@ function leaderBoard(data) {
       <div className="scrollable-container">
         {data.nodes
           .sort((a, b) => b.totalOutflowRate - a.totalOutflowRate)
-          .filter((x) => x.id !== "0x9d8d022f291c114a44a94e69b3e05cc1cb3d90e7")
           .map((node, index) => {
             if (node.totalOutflowRate > 0) {
               return (
