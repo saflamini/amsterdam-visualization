@@ -38,7 +38,7 @@ function Graph(gData) {
         nodeLabel={node => label(node)}
         nodeVal="nodeRelSize"
         nodeRelSize={3}
-        width={window.innerWidth * 7/10}
+        width={window.innerWidth}
         height={window.innerHeight}
         backgroundColor="rgb(0,0,0)"
       />
