@@ -7,7 +7,7 @@ const QUERY = gql`
   query Visualization {
     accountTokenSnapshots(
       where: {
-        token: "0xcaa7349cea390f89641fe306d93591f87595dc1f"
+        token: "0x738ab61234da221d6d63ebac5a82222839635727"
         totalOutflowRate_gt: "0"
       }
       orderBy: totalOutflowRate
@@ -63,16 +63,18 @@ export default function Visualize() {
     console.error(error);
     return null;
   }
+
   const nodeAndLinkData = ConstructNodeAndLinkData(data);
   return (
+    <div>
     <div className="grid grid-cols-10 w-full">
-      {/* <div className="floating-qr">
-        <img alt="bgt-qr" src="bgt-qr.png" />
-      </div> */}
       <div className="col-span-10">{Graph(nodeAndLinkData)}</div>
-      {/* <div className="col-span-3 p-10 bg-black">
-        {leaderBoard(nodeAndLinkData)}
-      </div> */}
+    </div>
+
+    // <div className="col-span-3 p-10 bg-black">
+    //   {/* <leaderBoard  data={nodeAndLinkData}/> */}
+    //   {leaderBoard(nodeAndLinkData)}
+    // </div>
     </div>
   );
 }

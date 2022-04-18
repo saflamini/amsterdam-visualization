@@ -2,6 +2,7 @@ import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import ClientOnly from "../components/ClientOnly";
 import QueryResult from "../components/visualize";
+import Visualize from "../components/visualize";
 // import LeaderBoard from "../components/leaderBoard";
 
 export default function ClientSide() {
@@ -13,7 +14,8 @@ export default function ClientSide() {
       </Head>
 
       <ClientOnly>
-        <QueryResult />
+        {/* <QueryResult /> */}
+        <Visualize />
       </ClientOnly>
     </>
   );
